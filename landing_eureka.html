@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eureka Dreams — Homepage Redesign</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #070710;
+      --bg-soft: #10101b;
+      --card: rgba(255, 255, 255, 0.055);
+      --card-strong: rgba(255, 255, 255, 0.095);
+      --text: #f5f4ff;
+      --muted: #a8a6bc;
+      --line: rgba(255, 255, 255, 0.11);
+      --yellow: #ffbf1b;
+      --yellow-soft: rgba(255, 191, 27, 0.12);
+      --blue: #5376ff;
+      --blue-soft: rgba(83, 118, 255, 0.16);
+      --green: #68f0c8;
+      --radius: 24px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 6%, rgba(255, 191, 27, 0.22), transparent 22rem),
+        radial-gradient(circle at 88% 18%, rgba(83, 118, 255, 0.18), transparent 26rem),
+        radial-gradient(circle at 70% 78%, rgba(255, 191, 27, 0.13), transparent 24rem),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin-top: 0; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 7, 16, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #111;
+      background: linear-gradient(135deg, var(--yellow), #ffe083);
+      box-shadow: 0 0 30px rgba(255, 191, 27, 0.25);
+    }
+
+    .brand span:last-child { font-size: 18px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 999px;
+      color: #11131c;
+      font-weight: 800;
+      background: var(--yellow);
+      box-shadow: 0 10px 28px rgba(255, 191, 27, 0.23);
+    }
+
+    .section {
+      padding: 86px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .hero {
+      position: relative;
+      padding: 96px 0 80px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 4% -20% auto auto;
+      width: 640px;
+      height: 640px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 58px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--yellow);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 18px var(--yellow);
+    }
+
+    .kicker {
+      margin-bottom: 14px;
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 22px;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 0.96;
+      letter-spacing: -0.075em;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+    }
+
+    h3 {
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .accent { color: var(--yellow); }
+
+    .hero-copy {
+      max-width: 680px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.55;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #0a0b12;
+      background: var(--yellow);
+      box-shadow: 0 14px 38px rgba(255, 191, 27, 0.22);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255, 255, 255, 0.14);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .mini-point {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.045);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .mini-point strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .product-visual {
+      position: relative;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 530px;
+      height: 530px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .orbit::before {
+      content: "";
+      position: absolute;
+      inset: 54px;
+      border: 1px dashed rgba(255, 191, 27, 0.18);
+      border-radius: 50%;
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      top: 88px;
+      right: 76px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 24px rgba(83, 118, 255, 0.8);
+    }
+
+    .visual-stack {
+      position: relative;
+      width: min(440px, 100%);
+      transform: rotate(-7deg);
+    }
+
+    .floating-card {
+      min-height: 120px;
+      margin: -14px 0;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045)),
+        rgba(18, 18, 30, 0.88);
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+    }
+
+    .floating-card:nth-child(1) { transform: translateX(48px); }
+    .floating-card:nth-child(2) { transform: translateX(-10px); }
+    .floating-card:nth-child(3) { transform: translateX(70px); }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--yellow);
+      background: var(--yellow-soft);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .dots { display: flex; gap: 6px; }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .bar {
+      height: 10px;
+      margin: 9px 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .bar.w1 { width: 80%; }
+    .bar.w2 { width: 56%; }
+    .bar.w3 { width: 92%; background: linear-gradient(90deg, var(--yellow), var(--blue)); }
+
+    .stats-card {
+      position: absolute;
+      right: 0;
+      bottom: 36px;
+      width: 260px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 22px;
+      background: rgba(10, 10, 18, 0.9);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.36);
+    }
+
+    .stats-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+
+    .logo-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .logo-box {
+      min-height: 86px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      color: rgba(255, 255, 255, 0.62);
+      background: rgba(255, 255, 255, 0.035);
+      font-weight: 800;
+    }
+
+    .service-grid,
+    .value-grid,
+    .ai-grid,
+    .case-grid,
+    .pricing-grid,
+    .stat-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .service-grid { grid-template-columns: repeat(4, 1fr); }
+    .value-grid { grid-template-columns: repeat(4, 1fr); }
+    .ai-grid { grid-template-columns: repeat(3, 1fr); }
+    .case-grid { grid-template-columns: repeat(3, 1fr); }
+    .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+    .stat-grid { grid-template-columns: repeat(4, 1fr); }
+
+    .card,
+    .service-card,
+    .value-card,
+    .case-card,
+    .price-card,
+    .stat-card,
+    .ai-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .service-card,
+    .case-card,
+    .price-card {
+      background:
+        linear-gradient(145deg, rgba(255, 191, 27, 0.10), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .card h3,
+    .service-card h3,
+    .value-card h3,
+    .case-card h3,
+    .price-card h3,
+    .stat-card h3,
+    .ai-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p,
+    .service-card p,
+    .value-card p,
+    .case-card p,
+    .price-card p,
+    .stat-card p,
+    .ai-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      color: var(--yellow);
+      background: var(--yellow-soft);
+      font-weight: 800;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      counter-reset: step;
+    }
+
+    .process-item {
+      position: relative;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.042);
+      overflow: hidden;
+    }
+
+    .process-item::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+      border-radius: 50%;
+      color: #111;
+      background: var(--yellow);
+      font-weight: 900;
+    }
+
+    .process-item::after {
+      content: "";
+      position: absolute;
+      top: 44px;
+      left: 72px;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--yellow), transparent);
+    }
+
+    .process-item strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 19px;
+      color: var(--text);
+    }
+
+    .process-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .split-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 30px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 0% 100%, rgba(255, 191, 27, 0.16), transparent 24rem),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .image-placeholder {
+      min-height: 360px;
+      border: 1px solid rgba(255, 191, 27, 0.28);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(255, 191, 27, 0.20), transparent 12rem),
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.55);
+      font-weight: 800;
+      text-align: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .location-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .location {
+      display: flex;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .location strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .location span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .price {
+      margin: 20px 0 8px;
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .price-card.featured {
+      border-color: rgba(83, 118, 255, 0.36);
+      background: linear-gradient(145deg, rgba(83, 118, 255, 0.16), rgba(255, 255, 255, 0.04));
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.07);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .comparison-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .comparison-row:last-child { border-bottom: 0; }
+    .comparison-row strong { color: var(--yellow); }
+    .comparison-row span { color: var(--muted); }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    form { display: grid; gap: 14px; }
+    .field-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.18);
+      outline: none;
+      font: inherit;
+    }
+
+    textarea { min-height: 120px; padding-top: 14px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 4px rgba(255, 191, 27, 0.1);
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    footer {
+      padding: 46px 0;
+      border-top: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-grid strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .footer-grid a {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    .footer-grid a:hover { color: var(--text); }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .section-header,
+      .split-card,
+      .contact-card { grid-template-columns: 1fr; }
+      .product-visual { min-height: 460px; }
+      .hero-points,
+      .service-grid,
+      .value-grid,
+      .ai-grid,
+      .case-grid,
+      .pricing-grid,
+      .stat-grid,
+      .process-timeline,
+      .logo-strip,
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .hero { padding: 66px 0 56px; }
+      .section { padding: 64px 0; }
+      .hero-points,
+      .service-grid,
+      .value-grid,
+      .ai-grid,
+      .case-grid,
+      .pricing-grid,
+      .stat-grid,
+      .process-timeline,
+      .logo-strip,
+      .field-grid,
+      .footer-grid { grid-template-columns: 1fr; }
+      .product-visual { min-height: 380px; }
+      .orbit { width: 360px; height: 360px; }
+      .stats-card { position: relative; right: auto; bottom: auto; width: 100%; margin-top: 18px; }
+      .split-card,
+      .contact-card { padding: 22px; }
+      h1 { font-size: clamp(40px, 13vw, 58px); }
+      h2 { font-size: clamp(30px, 10vw, 44px); }
+      .comparison-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Eureka Dreams home">
+        <span class="brand-mark">E</span>
+        <span>Eureka Dreams</span>
+      </a>
+      <div class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#model">Packages</a>
+        <a href="#cases">Success Stories</a>
+        <a href="#contact" class="nav-cta">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Product strategy, design & engineering</div>
+          <h1>We design and build <span class="accent">scalable digital products</span> — together.</h1>
+          <p class="hero-copy">More than development. Real product thinking for startups and ambitious teams that need to design, build, launch, and scale digital solutions.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Book a free consultation</a>
+            <a class="btn btn-secondary" href="#services">Explore our services</a>
+          </div>
+          <div class="hero-points">
+            <div class="mini-point"><strong>10+ years experience</strong>LATAM engineering excellence with global ambition.</div>
+            <div class="mini-point"><strong>Strategy before code</strong>Product thinking before development starts.</div>
+            <div class="mini-point"><strong>Long-term mindset</strong>We build solutions that can evolve with your business.</div>
+          </div>
+        </div>
+
+        <div class="product-visual" aria-label="Eureka Dreams product development visual">
+          <div class="orbit"></div>
+          <div class="visual-stack">
+            <div class="floating-card">
+              <div class="card-top"><span class="pill">Strategy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+              <div class="bar w3"></div><div class="bar w1"></div><div class="bar w2"></div>
+            </div>
+            <div class="floating-card">
+              <div class="card-top"><span class="pill">Design + UX/UI</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+              <div class="bar w1"></div><div class="bar w3"></div><div class="bar w2"></div>
+            </div>
+            <div class="floating-card">
+              <div class="card-top"><span class="pill">Build + Launch</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+              <div class="bar w2"></div><div class="bar w1"></div><div class="bar w3"></div>
+            </div>
+          </div>
+          <div class="stats-card">
+            <span class="pill">End-to-end team</span>
+            <strong>Idea → Launch</strong>
+            <p class="section-copy" style="font-size:14px;margin:8px 0 0;">Strategy, design, development, cloud, and AI.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">What we believe</div>
+            <h2>More than development. <span class="accent">Real product thinking.</span></h2>
+          </div>
+          <p class="section-copy">We are not just here to write code. We work as a strategic technology partner to help you make better decisions, reduce uncertainty, and create digital products with real business impact.</p>
+        </div>
+
+        <div class="process-timeline">
+          <article class="process-item"><strong>Strategy</strong><p>Define product goals, users, scope, and roadmap before execution.</p></article>
+          <article class="process-item"><strong>Design</strong><p>Create intuitive flows, prototypes, and UI systems that support adoption.</p></article>
+          <article class="process-item"><strong>Build</strong><p>Develop scalable software, APIs, integrations, and cloud infrastructure.</p></article>
+          <article class="process-item"><strong>Launch & Grow</strong><p>Deploy, measure, improve, and support product evolution.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">Trusted by teams</div>
+            <h2>Do what you love. We help you build what comes next.</h2>
+          </div>
+          <p class="section-copy">We work with startups and growing companies across sectors that need strategic execution and a reliable product team.</p>
+        </div>
+        <div class="logo-strip">
+          <div class="logo-box">Vikon</div>
+          <div class="logo-box">Clamper</div>
+          <div class="logo-box">XCountry</div>
+          <div class="logo-box">Kampo</div>
+          <div class="logo-box">Yuppie</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">Services</div>
+            <h2>From idea to launch, we cover the essential stages of <span class="accent">digital product development.</span></h2>
+          </div>
+          <p class="section-copy">Our services are designed to help companies move faster, reduce uncertainty, and build with confidence.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="icon">▦</div>
+            <h3>Design</h3>
+            <p>Turn your idea into a clear, validated product experience.</p>
+            <div class="tags"><span class="tag">UX/UI design</span><span class="tag">Look & feel</span><span class="tag">Interactive prototype</span></div>
+          </article>
+          <article class="service-card">
+            <div class="icon">⌘</div>
+            <h3>Build</h3>
+            <p>Develop scalable, high-quality software ready for real users.</p>
+            <div class="tags"><span class="tag">Frontend</span><span class="tag">Backend</span><span class="tag">Software architecture</span></div>
+          </article>
+          <article class="service-card">
+            <div class="icon">☁</div>
+            <h3>Launch</h3>
+            <p>Deploy and support your product with the right cloud foundations.</p>
+            <div class="tags"><span class="tag">Cloud infrastructure</span><span class="tag">Product deployment</span><span class="tag">Ongoing support</span></div>
+          </article>
+          <article class="service-card">
+            <div class="icon">✦</div>
+            <h3>AI Solutions</h3>
+            <p>Integrate AI features and automation into your product or operations.</p>
+            <div class="tags"><span class="tag">Automation</span><span class="tag">Data models</span><span class="tag">AI integrations</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="split-card">
+          <div>
+            <div class="kicker">Why we are different</div>
+            <h2>A strategic technology partner for <span class="accent">ambitious teams.</span></h2>
+            <p class="section-copy" style="margin-top:20px;">We combine product thinking, design, and engineering execution to help companies build better digital products with a clear business purpose.</p>
+            <div class="stat-grid" style="margin-top:28px;grid-template-columns:repeat(2,1fr);">
+              <article class="stat-card"><strong>77+</strong><h3>Satisfied clients</h3><p>Teams supported across multiple industries.</p></article>
+              <article class="stat-card"><strong>110+</strong><h3>Projects delivered</h3><p>Digital products, platforms, and internal tools.</p></article>
+            </div>
+          </div>
+          <div class="image-placeholder">Product screenshots / mobile app mockups</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">About</div>
+            <h2>Built in LATAM. Designed for <span class="accent">global growth.</span></h2>
+          </div>
+          <p class="section-copy">Eureka Dreams is a digital product development company that helps startups and teams build scalable solutions with the right mix of business thinking and technical execution.</p>
+        </div>
+
+        <div class="split-card">
+          <div class="image-placeholder">Human-first mindset / team image</div>
+          <div>
+            <div class="location-list">
+              <div class="location"><div class="icon">CO</div><div><strong>Colombia</strong><span>Product strategy, project coordination, and software development.</span></div></div>
+              <div class="location"><div class="icon">AR</div><div><strong>Argentina</strong><span>Architecture, cloud, backend, frontend, and engineering support.</span></div></div>
+              <div class="location"><div class="icon">US</div><div><strong>United States</strong><span>Business alignment, communication, and global expansion focus.</span></div></div>
+              <div class="location"><div class="icon">▦</div><div><strong>We work as an extension of your team</strong><span>We build solutions that last, not just isolated deliverables.</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">Our approach</div>
+            <h2>We don’t just build software. We build <span class="accent">long-term solutions</span> with our clients.</h2>
+          </div>
+          <p class="section-copy">Through clear scope, product thinking, continuous validation, and technical execution, we create digital solutions that can evolve and support business growth.</p>
+        </div>
+
+        <div class="value-grid">
+          <article class="value-card"><div class="icon">01</div><h3>Human-first mindset</h3><p>We build around real users, business goals, and practical adoption.</p></article>
+          <article class="value-card"><div class="icon">02</div><h3>Technical excellence</h3><p>We create reliable software foundations for future growth.</p></article>
+          <article class="value-card"><div class="icon">03</div><h3>Scalable architecture</h3><p>We think beyond the first version and prepare products to evolve.</p></article>
+          <article class="value-card"><div class="icon">04</div><h3>Client collaboration</h3><p>We work closely with your team to make better decisions together.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="model">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">Packages</div>
+            <h2>Flexible engagement models for <span class="accent">different stages of growth.</span></h2>
+          </div>
+          <p class="section-copy">Whether you are validating an idea, building a new product, or scaling an existing one, we offer flexible models that adapt to your stage, goals, and technical needs.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <span class="pill">Project</span>
+            <h3>MVP Starter</h3>
+            <p>A focused package to validate, design, and build a first version of your product.</p>
+            <div class="price">$18K–$25K <small>USD</small></div>
+            <div class="tags"><span class="tag">Product strategy</span><span class="tag">UX/UI design</span><span class="tag">Basic MVP</span></div>
+          </article>
+          <article class="price-card featured">
+            <span class="pill" style="color:var(--blue);background:var(--blue-soft);">Best Match</span>
+            <h3>Full MVP Development</h3>
+            <p>A complete end-to-end build for teams that need strategy, design, engineering, and launch.</p>
+            <div class="price">$25K–$45K <small>USD</small></div>
+            <div class="tags"><span class="tag">Product discovery</span><span class="tag">UX/UI design</span><span class="tag">Backend + frontend</span><span class="tag">Launch support</span></div>
+          </article>
+          <article class="price-card">
+            <span class="pill">Premium</span>
+            <h3>MVP + AI</h3>
+            <p>For teams looking to build advanced digital products with AI capabilities from the start.</p>
+            <div class="price">$45K–$70K+ <small>USD</small></div>
+            <div class="tags"><span class="tag">AI-powered features</span><span class="tag">Automation</span><span class="tag">Advanced architecture</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header" style="text-align:center;display:block;max-width:780px;margin-inline:auto;">
+          <div class="kicker">Smarter way</div>
+          <h2>A smarter way to build <span class="accent">digital products.</span></h2>
+          <p class="section-copy" style="margin-top:20px;">Compared with traditional agencies, our model is designed to be faster, more flexible, and more aligned with startup growth.</p>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-row"><strong>Eureka Dreams</strong><span>Other agencies</span></div>
+          <div class="comparison-row"><strong>Flexible / High</strong><span>Flexibility varies</span></div>
+          <div class="comparison-row"><strong>12–16 weeks</strong><span>4–8 months</span></div>
+          <div class="comparison-row"><strong>Quality / High</strong><span>Quality depends on team</span></div>
+          <div class="comparison-row"><strong>Product-led support</strong><span>Often delivery-focused</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <div class="kicker">Book a consultation</div>
+            <h2>Start your product <span class="accent">journey today.</span></h2>
+            <p class="section-copy" style="margin-top:20px;">Book a free consultation and let’s discuss your project, your goals, and the best path to launch.</p>
+            <div class="image-placeholder" style="min-height:260px;margin-top:28px;">Contact / founder image placeholder</div>
+          </div>
+
+          <form>
+            <div class="field-grid">
+              <label>Full name<input type="text" placeholder="Your full name" /></label>
+              <label>Phone / WhatsApp<input type="tel" placeholder="+1" /></label>
+            </div>
+            <div class="field-grid">
+              <label>Email<input type="email" placeholder="you@company.com" /></label>
+              <label>Subject<select><option>Select subject</option><option>MVP Development</option><option>AI Solutions</option><option>Product Strategy</option><option>Other</option></select></label>
+            </div>
+            <label>Tell us about your project<textarea placeholder="Briefly explain your idea, goals, or current challenge"></textarea></label>
+            <label style="display:flex;align-items:center;gap:10px;"><input type="checkbox" style="width:auto;min-height:auto;" /> I have read and agree to the Privacy Policy.</label>
+            <button class="btn btn-primary" type="button">Submit Form</button>
+            <p class="form-note">This is a visual mockup. Connect this form to your CRM, email, or form plugin before publishing.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="kicker">Success stories</div>
+            <h2>Turning ambitious ideas into <span class="accent">digital products</span> with real impact.</h2>
+          </div>
+          <p class="section-copy">A selection of projects and platforms where digital product development helped clients move faster and create value.</p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-card"><div class="icon">WA</div><h3>WhatsApp</h3><p>On-demand platform powered by WhatsApp and real-time operations.</p><div class="tags"><span class="tag">Messaging</span><span class="tag">Automation</span></div></article>
+          <article class="case-card"><div class="icon">K</div><h3>Kampo</h3><p>Social platform for a sustainable discovery and destination experience.</p><div class="tags"><span class="tag">Mobile</span><span class="tag">Community</span></div></article>
+          <article class="case-card"><div class="icon">Y</div><h3>Yuppie</h3><p>Marketplace and digital platform for car-related services and products.</p><div class="tags"><span class="tag">Marketplace</span><span class="tag">Growth</span></div></article>
+        </div>
+
+        <div class="cta-row" style="justify-content:center;margin-top:28px;">
+          <a class="btn btn-primary" href="#contact">View all success stories</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>Eureka Dreams</strong>
+        <p>Digital product strategy, design, development, cloud deployment, and AI solutions for startups and growing teams.</p>
+      </div>
+      <div>
+        <strong>Address</strong>
+        <a>381 Boylston St, Boston, MA 02116</a>
+      </div>
+      <div>
+        <strong>Contact Us</strong>
+        <a href="#contact">Book a Call</a>
+        <a href="mailto:hello@eurekadreams.com">hello@eurekadreams.com</a>
+      </div>
+      <div>
+        <strong>Support</strong>
+        <a href="#">E-mail</a>
+        <a href="#">Help Desk</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
